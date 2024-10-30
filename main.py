@@ -43,7 +43,7 @@ def detect(template, img, w, h, mouse, mode):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     result = cv2.matchTemplate(img_gray, cv2.cvtColor(template, cv2.COLOR_BGR2GRAY), cv2.TM_CCOEFF_NORMED)
 
-    threshold = 0.8
+    threshold = 0.8176
     loc = np.where(result >= threshold)
 
     if loc[0].size > 0:
@@ -76,9 +76,8 @@ def click():
             img = np.array(sct.grab(second_monitor))
             img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
             if detect(ready, img, wrea, hrea, mouse, False):
-                if not detect(boo, img, wboo, hboo, mouse, False):
-                    if not detect(lastwater, img, wlas, hlas, mouse, False):
-                        detect(water, img, wwat, hwat, mouse, True)
+                if not detect(lastwater, img, wlas, hlas, mouse, False) and not detect(boo, img, wboo, hboo, mouse, False):
+                    detect(water, img, wwat, hwat, mouse, True)
             detect(dismiss, img, wdis, hdis, mouse, True)
             detect(bug, img, wbug, hbug, mouse, True)
             sleep(1)
@@ -86,5 +85,4 @@ def click():
 
 if __name__ == "__main__":
     print("Starting detection...")
-    time.sleep(2)
     click()
