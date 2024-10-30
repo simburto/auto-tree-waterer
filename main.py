@@ -53,12 +53,9 @@ def detect(template, img, w, h, mouse, mode):
 
         if mode:
             original_position = mouse.position
-
             mouse.position = (click_x, click_y)
             mouse.click(Button.left)
-
             print(f"Clicked at: ({click_x}, {click_y})")
-
             mouse.position = original_position
             pyautogui.keyDown('alt')
             pyautogui.press('tab')
