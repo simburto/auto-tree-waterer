@@ -42,10 +42,8 @@ second_monitor = {
 def detect(template, img, w, h, mouse, mode):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     result = cv2.matchTemplate(img_gray, cv2.cvtColor(template, cv2.COLOR_BGR2GRAY), cv2.TM_CCOEFF_NORMED)
-
     threshold = 0.8176
     loc = np.where(result >= threshold)
-
     if loc[0].size > 0:
         pt = (loc[1][0], loc[0][0])
         click_x = pt[0] + w // 2 + 1920
